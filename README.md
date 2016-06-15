@@ -1,0 +1,6 @@
+1、这个不需要建立aidl文件，在onBind方法中返回messenger的BInder对象，这就需要建立一个messenger对象了，其中需要传入一个handler参数
+2、这个handler参数用来处理客户端发来的信息，使用Messenger messengerFromClient = msg.replyTo;获取客户端的messenger对象，再使用它来send Message
+3、上述是在service中的，同样需要注册
+4、客户端同样是使用bindService
+5、在onServiceConnected中获取服务端的messenger对象（这个方法和aidl的不一样）
+6、将message的replyTo参数设置为客户端的messenger对象（这个很重要，不然服务端拿不到客户端的对象）
